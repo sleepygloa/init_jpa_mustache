@@ -20,3 +20,5 @@ build/
 
 # Mercurial syntax switch
 syntax: glob
+src/test/java/com/nambi/springboot/
+src/test/resources/
