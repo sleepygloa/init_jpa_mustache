@@ -40,7 +40,7 @@ deploy:
 
     butket: freelec-springboot-build-sleepygloa # S3 버킷
     key: com-nambi-book.zip # 빌드 파일을 압축해서 전달 bundle_type: zip
-    application: com.nambi.book # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션
+    application: com-nambi-book # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션
     deployment_group: freelec-springboot2-webservice-group # 웹 콘솔에서 등록한 CodeDeploy 배포그룹
     region : ap-northeast-2
     wait-until-deployed : true
