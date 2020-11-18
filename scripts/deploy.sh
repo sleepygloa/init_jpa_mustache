@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REPOSITORY=/home/ec2-user/app/step2
-PROJECT-NAME=freelec-springboot2-webservice
+PROJECT-NAME=com.nambi.book
 
 echo "> Build 파일 복사"
 
@@ -23,7 +23,7 @@ fi
 
 echo "> 새 애플리케이션 배포"
 
-JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
+JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)s
 
 echo "> JAR Name: $JAR_NAME"
 
