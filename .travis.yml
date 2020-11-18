@@ -18,7 +18,7 @@ before_install:
   - chmod +x gradlew
 
 before_deploy:
-  - zip -r com.nambi.book
+  - zip -r com.nambi.book *
   - mkdir -p deploy
   - mv com.nambi.book.zip deploy/com.nambi.book.zip
 
