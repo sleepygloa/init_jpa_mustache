@@ -50,7 +50,7 @@ deploy:
     key: com-nambi-book.zip # 빌드 파일을 압축해서 전달
     bundle_type: zip
     application: freelec-springboot-webservice # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션
-    deployment_group: freelec-springboot-webservice-group # 웹 콘솔에서 등록한 CodeDeploy 배포그룹
+    deployment_group: freelec-springboot-webservice-deploy-group # 웹 콘솔에서 등록한 CodeDeploy 배포그룹
     region : ap-northeast-2
     wait-until-deployed : true
 
