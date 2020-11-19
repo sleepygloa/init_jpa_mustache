@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REPOSITORY=/home/ec2-user/app/step2
-PROJECT-NAME=com.nambi.book
+PROJECT_NAME=com.nambi.book
 
 echo "> Build 파일 복사"
 
