@@ -26,9 +26,9 @@ before_deploy:
 #  - cd ../ && mkdir -p deploy # 상위 디렉토리로 이동 후 deploy 디렉토리 생성
 #  - mv before-deploy/before-deploy.zip deploy/com-nambi-book.zip #deploy로 zip 파일 이동
 
-  - zip -r com.nambi.book *
+  - zip -r com-nambi-book *
   - mkdir -p deploy
-  - mv com.nambi.book.zip deploy/com-nambi-book.zip
+  - mv com-nambi-book.zip deploy/com-nambi-book.zip
 
 deploy:
   - provider: s3
