@@ -39,6 +39,10 @@ dependencies {
 
     compile('org.springframework.session:spring-session-jdbc')
     compile('org.mariadb.jdbc:mariadb-java-client')
+
+    compile 'com.googlecode.json-simple:json-simple:1.1.1'
+
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
     //testCompile group: 'junit', name: 'junit', version: '4.12'
