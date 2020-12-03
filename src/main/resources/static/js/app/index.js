@@ -13,6 +13,13 @@ var main = {
         $('#btn-delete').on('click', function(){
             _this.delete();
         });
+
+
+        //API 호출
+        $('#callApiJuso').on('click', function(){
+            _this.delete();
+        });
+
     },
     save : function(){
         var data = {

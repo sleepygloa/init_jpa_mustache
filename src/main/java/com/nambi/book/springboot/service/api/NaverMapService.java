@@ -1,7 +1,10 @@
-package com.nambi.API.Naver;
+package com.nambi.book.springboot.service.api;
 
+import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,12 +16,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-public class NaverMap {
+@RequiredArgsConstructor
+@Service
+public class NaverMapService {
 
 
     //변수정의
-    private static String API_KEY = "";
-    private static String API_SECRET_KEY = "";
+    private  String API_KEY = "of9ytjj6w6";
+    private  String API_SECRET_KEY = "m3keXCg4BpiLgrkRHZicAdy9QimcQn0SeQuhpo6o";
     private Logger logger = Logger.getLogger("NaverMap");
 
     //기본변수 set,get
@@ -26,15 +31,15 @@ public class NaverMap {
         API_KEY = key;
     }
 
-    public static String  getAPIKEY() {
+    public  String  getAPIKEY() {
         return API_KEY;
     }
-    public static String  getAPISECRETKEY() {
+    public  String  getAPISECRETKEY() {
         return API_SECRET_KEY;
     }
 
     //TEST용 코드
-    public static void main(String[] args) {
+    public  void main(String[] args) {
 //		System.out.println("========TEST==========");
 //
 //		//geocoding test 소스
@@ -99,7 +104,7 @@ public class NaverMap {
     /**
      * baseUrl 정의
      * */
-    public static String getBaseUrl(String key) {
+    public  String getBaseUrl(String key) {
 
         String url = "";
 
@@ -127,7 +132,7 @@ public class NaverMap {
      * @param : List<Map> list
      * @Desc : list 는 존재하는 경유지수만큼 size() 존재. Map 에는 KEY, VALUE 가 (필수)X, Y, (선택)name 으로 있음.
      */
-    public static JSONObject getNaverApiDirection15(List<Map<String, Object>> list) {
+    public  JSONObject getNaverApiDirection15(List<Map<String, Object>> list) {
         //API 콜
         return callApi("DIRECTION15", getNaverApiDirectionContent(list));
     }
@@ -140,7 +145,7 @@ public class NaverMap {
      *         (이방식은 방문상세내역의 각 구간마다의 거리데이터, 톨비, 유류비를 구하기 어려움.)
      */
     @SuppressWarnings("unchecked")
-    public static JSONObject getNaverApiDirection5(List<Map<String, Object>> list) {
+    public  JSONObject getNaverApiDirection5(List<Map<String, Object>> list) {
         //API 콜
         return callApi("DIRECTION5", getNaverApiDirectionContent(list));
     }
@@ -151,7 +156,7 @@ public class NaverMap {
      * @param : List<Map> list
      * @Desc :
      */
-    private static String getNaverApiDirectionContent(List<Map<String, Object>> list) {
+    private  String getNaverApiDirectionContent(List<Map<String, Object>> list) {
         String content = "";
 
         //URL Content 작성.
@@ -197,7 +202,7 @@ public class NaverMap {
      * @param : String startX, String startY, String endX, String endY, String startName, String endName
      * @Desc : 출발지와 도착지1(, 도착지1과 도착지2,....) 존재만큼 상위에서 루프를 돌며, 건by건으로 통신하여 데이터 반환함.
      */
-    public static JSONObject getNaverApiDirection5(String startX, String startY, String endX, String endY, String startName, String endName) {
+    public  JSONObject getNaverApiDirection5(String startX, String startY, String endX, String endY, String startName, String endName) {
 
         String content = "";
 
@@ -221,7 +226,7 @@ public class NaverMap {
      * [REVERSE GEOCODING] : 네이버 지도에서는 좌표를 주소를 변환(coordsToAddr)하는 Reverse geocoding 서비스를 제공합니다. Reverse geocoding API를 이용해 특정 좌표에 해당하는 국내 법정동/행정동/지번주소/도로명주소 정보를 얻을 수 있습니다.
      * @param : String coordX, String coordY
      */
-    public static JSONObject getNaverApiReverseGeocoding(String coordX, String coordY) {
+    public  JSONObject getNaverApiReverseGeocoding(String coordX, String coordY) {
 
 
         //상위메서드에 옮길것.
@@ -242,7 +247,7 @@ public class NaverMap {
      * [GEOCODING] : 주소 검색 API는 지번, 도로명을 질의어로 사용해서 주소 정보를 검색합니다. 검색 결과로 주소 목록과 세부 정보를 JSON 형태로 반환합니다.
      * @param : String coordX, String coordY
      */
-    public static JSONObject getNaverApiGeocoding(String addr) {
+    public  JSONObject getNaverApiGeocoding(String addr) {
 
 
         //상위메서드에 옮길것.
@@ -266,15 +271,16 @@ public class NaverMap {
     /**
      * API 호출
      * */
-    public static JSONObject callApi(String apiKey, String content) {
+    public  JSONObject callApi(String apiKey, String content) {
 
         //API KEY 정의
-        String clientId = NaverMap.getAPIKEY(); //Client Id
-        String clientSecret = NaverMap.getAPISECRETKEY(); //Client Secret
+        String clientId = getAPIKEY(); //Client Id
+        String clientSecret = getAPISECRETKEY(); //Client Secret
 
         //기본으로 사용 할 변수 선언
         JSONObject jsonObject = new JSONObject();
         JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObject1 = new JSONObject();
         String innerUrl = getBaseUrl(apiKey);
 
         //Connection 변수 초기화
@@ -332,15 +338,17 @@ public class NaverMap {
             System.out.println(response.toString());
 
             jsonObject = (JSONObject) jsonParser.parse(response.toString());
+            JSONArray jsonArray = (JSONArray)jsonObject.get("addresses");
+            jsonObject1 = (JSONObject)jsonArray.get(0);
 
-            System.out.println("test    "+jsonObject.get("code"));
-
+            System.out.println(jsonObject1.toString());
+            //{"addresses":[{"distance":0.0,"roadAddress":"서울특별시 금천구 금하로23가길 4-2","x":"126.9088726","jibunAddress":"서울특별시 금천구 시흥동 828-4","y":"37.4514632","addressElements":[{"types":["SIDO"],"code":"","shortName":"서울특별시","longName":"서울특별시"},{"types":["SIGUGUN"],"code":"","shortName":"금천구","longName":"금천구"},{"types":["DONGMYUN"],"code":"","shortName":"시흥동","longName":"시흥동"},{"types":["RI"],"code":"","shortName":"","longName":""},{"types":["ROAD_NAME"],"code":"","shortName":"금하로23가길","longName":"금하로23가길"},{"types":["BUILDING_NUMBER"],"code":"","shortName":"4-2","longName":"4-2"},{"types":["BUILDING_NAME"],"code":"","shortName":"","longName":""},{"types":["LAND_NUMBER"],"code":"","shortName":"828-4","longName":"828-4"},{"types":["POSTAL_CODE"],"code":"","shortName":"08574","longName":"08574"}],"englishAddress":"4-2, Geumha-ro 23ga-gil, Geumcheon-gu, Seoul, Republic of Korea"}],"meta":{"count":1,"page":1,"totalCount":1},"errorMessage":"","status":"OK"}
         }catch(Exception e) {
             e.printStackTrace();
         }finally {
             con.disconnect();
         }
 
-        return jsonObject;
+        return jsonObject1;
     }
 }

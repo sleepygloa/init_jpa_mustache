@@ -1,0 +1,159 @@
+{{>layout/header}}
+
+<!--
+ 네이버 클라우드 플랫폼
+ static map
+ -->
+
+<head>
+
+    <style>
+        #requestAddrContainer{
+            padding:10px;
+        }
+        #form{
+            padding:10px;
+            margin-bottom: 20px;
+        }
+        #search{
+            display:inline-block;
+            width:85%;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: solid 1px black;
+            padding:5px;
+        }
+        #search:focus { outline: none; }
+        #searchAction{
+            display: inline-block;
+            background: white;
+            border:none;
+            padding:10px;
+            width:10%;
+        }
+        #list{
+            padding:10px;
+        }
+        .resultTable{
+            margin-top:15px;
+            width:100%;
+            float:left;
+        }
+        .roadaddr{
+            font-weight: 800;
+            width:100%;
+            float:left;
+        }
+        .basicaddr{
+            width:80%;
+            float:left;
+        }
+        .zipcode{
+            width:10%;
+            float:right;
+        }
+    </style>
+</head>
+
+<div id="requestAddrContainer">
+    <form name="form" id="form" method="post" onsubmit="return false;">
+
+        <input type="hidden" name="currentPage" value="1"/> <!-- 요청 변수 설정 (현재 페이지. currentPage : n > 0) -->
+        <input type="hidden" name="countPerPage" value="10"/><!-- 요청 변수 설정 (페이지당 출력 개수. countPerPage 범위 : 0 < n <= 100) -->
+        <input type="hidden" name="resultType" value="json"/> <!-- 요청 변수 설정 (검색결과형식 설정, json) -->
+        <input type="hidden" name="confmKey" value="devU01TX0FVVEgyMDIwMTIwMzEwNDE0NDExMDQ5NjA="/><!-- 요청 변수 설정 (승인키) -->
+        <input id="search" class="" type="text" name="keyword" value=""/><!-- 요청 변수 설정 (키워드) -->
+        <!-- Standard button -->
+        <button id="searchAction" type="button" class="" onClick="getAddrMapNaver();">검색</button>
+
+
+    </form>
+    <div id="map" style="width:100%; height:400px;" ></div><!-- 검색 결과 리스트 출력 영역 -->
+    {{#distance}}{{distance}}{{/distance}}
+    {{#roadAddress}}{{roadAddress}}{{/roadAddress}}
+
+    <a href="/" class="btn btn-secondary" role="button">뒤로가기</a>
+</div>
+
+
+
+{{>layout/footer}}
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=83bfuniegk&amp;submodules=panorama"></script>
+<script language="javascript">
+
+    function getAddrMapNaver(){
+        var addr = $('#search').val();
+
+        $.ajax({
+            type : 'POST',
+            url : '/api/jusoMapNaver/webdynamicmap/getNaverApiGeocoding/' + addr,
+            contentType : 'application/json; charset=utf-8'
+        }).done(function(data){
+            console.log(data);
+
+            //마커
+            onSuccessGeolocation(data);
+
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        });
+    };
+
+    /****************************************************
+     * 기본형
+     * **************************************************/
+    /*//지도를 삽입할 HTML 요소 또는 HTML 요소의 id를 지정합니다.
+    var mapDiv = document.getElementById('map'); // 'map'으로 선언해도 동일
+
+    //옵션 없이 지도 객체를 생성하면 서울 시청을 중심으로 하는 16 레벨의 지도가 생성됩니다.
+    var map = new naver.maps.Map(mapDiv);*/
+
+    /****************************************************
+     * 기본형
+     * **************************************************/
+    var map = new naver.maps.Map('map', {
+        center: new naver.maps.LatLng(37.5666805, 126.9784147),
+        zoom: 10,
+        mapTypeId: naver.maps.MapTypeId.NORMAL
+    });
+
+    var infowindow = new naver.maps.InfoWindow();
+
+    function onSuccessGeolocation(data) {
+        var location = new naver.maps.LatLng(data.y,
+                data.x);
+
+        map.setCenter(location); // 얻은 좌표를 지도의 중심으로 설정합니다.
+        map.setZoom(16); // 지도의 줌 레벨을 변경합니다.
+
+        infowindow.setContent('<div style="padding:20px;">' + 'geolocation.getCurrentPosition() 위치' + '</div>');
+
+        infowindow.open(map, location);
+        console.log('Coordinates: ' + location.toString());
+    }
+
+    function onErrorGeolocation() {
+        var center = map.getCenter();
+
+        infowindow.setContent('<div style="padding:20px;">' +
+                '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
+
+        infowindow.open(map, center);
+    }
+
+    $(window).on("load", function() {
+        if (navigator.geolocation) {
+            /**
+             * navigator.geolocation 은 Chrome 50 버젼 이후로 HTTP 환경에서 사용이 Deprecate 되어 HTTPS 환경에서만 사용 가능 합니다.
+             * http://localhost 에서는 사용이 가능하며, 테스트 목적으로, Chrome 의 바로가기를 만들어서 아래와 같이 설정하면 접속은 가능합니다.
+             * chrome.exe --unsafely-treat-insecure-origin-as-secure="http://example.com"
+             */
+            navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
+        } else {
+            var center = map.getCenter();
+            infowindow.setContent('<div style="padding:20px;"><h5 style="margin-bottom:5px;color:#f00;">Geolocation not supported</h5></div>');
+            infowindow.open(map, center);
+        }
+    });
+</script>

@@ -30,6 +30,9 @@ public class IndexController {
         return "index";
     }
 
+    /************************************************************
+    * 메인화면 게시판
+    *************************************************************/
     @GetMapping("/posts/save")
     public String postsSave(){ return "posts-save"; }
 
@@ -40,5 +43,23 @@ public class IndexController {
 
         return "posts-update";
     }
+
+    /************************************************************
+     * 주소찾기 API
+     * https://www.juso.go.kr/openIndexPage.do#
+     *************************************************************/
+    @GetMapping("/api/juso")
+    public String getJuso(){ return "api/juso"; }
+
+    @GetMapping("/api/jusoMapNaver")
+    public String getJusoMapNaver(Model model){
+        return "api/jusoMapNaver";
+    }
+
+    @GetMapping("/api/juso_interpark")
+    public String getJuso_interpark(){ return "api/juso_interpark"; }
+
+
+
 
 }

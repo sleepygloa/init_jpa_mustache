@@ -41,7 +41,7 @@ dependencies {
     compile('org.mariadb.jdbc:mariadb-java-client')
 
     compile 'com.googlecode.json-simple:json-simple:1.1.1'
-
+    compile 'org.springframework.boot:spring-boot-devtools'
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
