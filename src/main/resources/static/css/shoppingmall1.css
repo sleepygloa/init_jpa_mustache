@@ -1,0 +1,90 @@
+
+/*상품 리스트 바*/
+
+/*상품 리스트 사이즈*/
+.prod-list-bar .prod-list-box > ul > li {
+  width:calc(100%/ 5);
+  box-sizing: border-box;
+  padding: 0 10px;
+  margin-top: 10px;
+}
+.prod-list-bar .prod-list-box > ul {
+  margin: 0 -10px;
+}
+/*상품 리스트 반응형 사이즈*/
+@media (max-width:1000px) {
+  .prod-list-bar .prod-list-box > ul > li {
+    width: calc(100%/4);
+  }
+}
+@media (max-width:800px) {
+  .prod-list-bar .prod-list-box > ul > li {
+    width: calc(100%/3);
+  }
+}
+@media (max-width:600px) {
+  .prod-list-bar .prod-list-box > ul > li {
+    width: calc(100%/2);
+  }
+}
+@media (max-width:400px) {
+  .prod-list-bar .prod-list-box > ul > li {
+    width: calc(100%/1);
+  }
+}
+
+/*상품 이름,가격*/
+.prod-list-bar .prod-list-box > ul > li > a > .prod-name,.prod-price {
+  font-weight: bold;
+  text-align: center;
+}
+.prod-list-bar .prod-list-box > ul > li > a > .prod-price {
+  font-size: 1.5rem;
+}
+
+/*상품 리스트 강조*/
+.prod-list-bar .prod-list-box > ul > li > a > .img-box {
+  overflow: hidden;
+  position: relative;
+}
+/*상품 리스트 강조-배경*/
+.prod-list-bar .prod-list-box > ul > li > a > .img-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: 1;
+}
+.prod-list-bar .prod-list-box > ul > li:hover > a > .img-box::before {
+  opacity: 0.5;
+}
+/*상품 리스트 강조-view*/
+.prod-list-bar .prod-list-box > ul > li > a > .img-box::after {
+  content:"VIEW";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  border: 3px solid white;
+  padding: 5px;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: 2;
+}
+.prod-list-bar .prod-list-box > ul > li:hover > a > .img-box::after {
+  opacity: 1;
+}
+/*상품 리스트 강조-확대*/
+.prod-list-bar .prod-list-box > ul > li > a > .img-box img {
+  transition: transform 0.5s;
+}
+.prod-list-bar .prod-list-box > ul > li:hover > a > .img-box img {
+  transform: scale(1.3);
+}

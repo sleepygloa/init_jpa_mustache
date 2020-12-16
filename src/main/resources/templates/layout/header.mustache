@@ -4,6 +4,300 @@
     <title>스프링 부트 웹서비스</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+
+    <style>
+/*노말라이즈*/
+body,ul,li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+/*라이브러리*/
+html,body {
+  overflow-x : hidden;
+}
+.con {
+  margin: 0 auto;
+}
+.row::after {
+  content:"";
+  display: block;
+  clear: both;
+}
+.cell {
+  float: left;
+}
+.img-box img {
+  display: block;
+  width: 100%;
+}
+
+/*커스텀*/
+
+.con {
+  max-width: 1200px;
+}
+
+/*로고*/
+.logo-bar {
+  margin-top: 10px;
+  text-align: center;
+  position: relative;
+}
+
+/*상단 메뉴 바*/
+.top-menu-bar {
+  margin-top: 10px;
+}
+.top-menu-bar .top-menu-box-1 > ul > li {
+  width:calc(100%/7);
+}
+@media (max-width:800px) {
+  .top-menu-bar {
+    display: none;
+  }
+}
+.top-menu-bar .top-menu-box-1 ul > li > a {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap;
+  position: relative;
+}
+.top-menu-bar .top-menu-box-1 ul > li:hover > a {
+  color: pink;
+  text-decoration: underline;
+}
+.top-menu-bar .top-menu-box-1 ul > li > a::before, .top-menu-bar .top-menu-box-1 ul > li:last-child > a::after {
+  content:"";
+  position: absolute;
+  width: 2px;
+  height: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: black;
+}
+.top-menu-bar .top-menu-box-1 ul > li > a::before {
+  left: 0;
+}
+.top-menu-bar .top-menu-box-1 ul > li:last-child > a::after {
+  right: 0;
+}
+
+/*사이드 메뉴 바*/
+<!--.side-menu-button {
+  display: none;
+}
+@media (max-width: 800px) {
+  .side-menu-button {
+    display: block;
+  }
+}-->
+.side-menu-button {
+display: block;
+}
+
+/*사이드 메뉴 버튼*/
+.side-menu-button {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  cursor: pointer;
+}
+.side-menu-button .img-box {
+  width: 35px;
+}
+/*사이드 메뉴 박스*/
+.side-menu-button:hover .side-menu-bar {
+  left: 0;
+}
+.side-menu-bar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  height: 100%;
+  width: 200px; /* 사이드바 너비*/
+  background-color: #dfdfdf;
+  box-sizing: border-box;
+  z-index:3;
+  transition: left 1s;
+}
+.side-menu-bar .side-menu-box ul > li {
+  position: relative;
+  background-color: #dfdfdf;
+}
+.side-menu-bar .side-menu-box > ul {
+  margin-top: 20px;
+}
+.side-menu-bar .side-menu-box ul > li > a {
+  display: block;
+  padding: 5px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.side-menu-bar .side-menu-box > ul > li > a {
+  padding-left: 40px;
+}
+.side-menu-bar .side-menu-box ul > li:hover > a {
+  color: white;
+  background-color: black;
+}
+.side-menu-bar .side-menu-box ul ul {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+}
+.side-menu-bar .side-menu-box ul > li:hover > ul {
+  display: block;
+}
+
+/*상단 배너 박스*/
+.top-bn-box {
+  margin-top: 20px;
+}
+@media (max-width:800px) {
+  .top-bn-box .img-box {
+    margin-left: -50%;
+  }
+}
+
+
+
+
+#customBtn {
+  display: inline-block;
+  background: white;
+  color: #444;
+  width: 190px;
+  border-radius: 5px;
+  border: thin solid #888;
+  box-shadow: 1px 1px 1px grey;
+  white-space: nowrap;
+}
+#customBtn:hover {
+  cursor: pointer;
+}
+span.label {
+  font-family: serif;
+  font-weight: normal;
+}
+span.icon {
+  background: url('/images/logo/512px-Google__G__Logo.png') ;
+  display: inline-block;
+  vertical-align: middle;
+  width: 42px;
+  height: 42px;
+}
+span.buttonText {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 42px;
+  padding-right: 42px;
+  font-size: 14px;
+  font-weight: bold;
+  /* Use the Roboto font that is loaded in the <head> */
+  font-family: 'Roboto', sans-serif;
+}
+
+
+    </style>
+    <!-- 쇼핑몰 css -->
+    <!--<link href="/css/shoppingmall1.css" rel="stylesheet" >-->
 </head>
 <body>
+
+<div class="logo-bar">
+    <div class="logo-img">
+        <a href="#">
+            VBLog
+        </a>
+    </div>
+</div>
+
+<!-- 사이드메뉴 -->
+<div class="side-menu-button">
+    <div class="img-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/220px-Hamburger_icon.svg.png" alt="">
+    </div>
+    <div class="side-menu-bar">
+        <nav class="side-menu-box">
+            <ul>
+                <li>
+                    {{#userName}}
+                        <a href="/logout">로그아웃</a>
+                    {{/userName}}
+                </li>
+                <li>
+                    {{^userName}}
+                        <a href="/common/login">로그인</a>
+                    {{/userName}}
+                </li>
+
+                <li>
+                    <a href="/posts">게시판</a>
+                </li>
+                <li>
+                    <a href="#">VISUAL</a>
+                    <ul>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">STYLE</a>
+                    <ul>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">MEDIA</a>
+                    <ul>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">NEWS</a>
+                    <ul>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">STORE</a>
+                    <ul>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">CUSTOMER</a>
+                    <ul>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="#">2차메뉴아이템</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

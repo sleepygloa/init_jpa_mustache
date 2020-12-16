@@ -22,8 +22,6 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts", postsService.findAlldesc());
-
-
         if(user != null){
             model.addAttribute("userName", user.getName());
         }
@@ -31,8 +29,25 @@ public class IndexController {
     }
 
     /************************************************************
+     * 로그인 페이지로 이동
+     *************************************************************/
+    @GetMapping("/common/login")
+    public String login(){
+        return "login";
+    }
+
+    /************************************************************
     * 메인화면 게시판
     *************************************************************/
+    @GetMapping("/posts")
+    public String posts(Model model, @LoginUser SessionUser user){
+        model.addAttribute("posts", postsService.findAlldesc());
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+        return "posts";
+    }
+
     @GetMapping("/posts/save")
     public String postsSave(){ return "posts-save"; }
 
@@ -43,6 +58,8 @@ public class IndexController {
 
         return "posts-update";
     }
+
+
 
     /************************************************************
      * 주소찾기 API
