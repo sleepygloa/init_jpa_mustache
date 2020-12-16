@@ -49,6 +49,7 @@ html,body {
   margin-top: 10px;
   text-align: center;
   position: relative;
+  margin-bottom:10px;
 }
 
 /*상단 메뉴 바*/
@@ -114,9 +115,11 @@ display: block;
   width: 35px;
 }
 /*사이드 메뉴 박스*/
+/*
 .side-menu-button:hover .side-menu-bar {
   left: 0;
 }
+*/
 .side-menu-bar {
   position: fixed;
   top: 0;
@@ -222,8 +225,8 @@ span.buttonText {
 </div>
 
 <!-- 사이드메뉴 -->
-<div class="side-menu-button">
-    <div class="img-box">
+<div class="side-menu-button" >
+    <div class="img-box" id="side-menu-button">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/220px-Hamburger_icon.svg.png" alt="">
     </div>
     <div class="side-menu-bar">
@@ -244,9 +247,9 @@ span.buttonText {
                     <a href="/posts">게시판</a>
                 </li>
                 <li>
-                    <a href="#">VISUAL</a>
+                    <a href="#">시스템관리</a>
                     <ul>
-                        <li><a href="#">2차메뉴아이템</a></li>
+                        <li><a href="/common/menu">메뉴관리</a></li>
                         <li><a href="#">2차메뉴아이템</a></li>
                         <li><a href="#">2차메뉴아이템</a></li>
                         <li><a href="#">2차메뉴아이템</a></li>

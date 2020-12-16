@@ -2,19 +2,16 @@ package com.nambi.book.springboot.service.posts;
 
 import com.nambi.book.springboot.domain.posts.Posts;
 import com.nambi.book.springboot.domain.posts.PostsRepository;
-import com.nambi.book.springboot.web.dto.PostsListResponseDto;
-import com.nambi.book.springboot.web.dto.PostsResponseDto;
-import com.nambi.book.springboot.web.dto.PostsSaveRequestDto;
-import com.nambi.book.springboot.web.dto.PostsUpdateRequestDto;
+import com.nambi.book.springboot.web.dto.post.PostsListResponseDto;
+import com.nambi.book.springboot.web.dto.post.PostsResponseDto;
+import com.nambi.book.springboot.web.dto.post.PostsSaveRequestDto;
+import com.nambi.book.springboot.web.dto.post.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-
-import java.nio.ReadOnlyBufferException;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor

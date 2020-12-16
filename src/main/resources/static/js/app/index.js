@@ -2,6 +2,14 @@ var main = {
     init : function(){
         var _this = this;
 
+        $('#side-menu-button').on('click', function(){
+            $('.side-menu-bar').css('left', '0px');
+
+
+        });
+        //닫기
+
+
         $('#btn-save').on('click', function(){
             _this.save();
         });
@@ -14,13 +22,13 @@ var main = {
             _this.delete();
         });
 
-
         //API 호출
         $('#callApiJuso').on('click', function(){
             _this.delete();
         });
 
     },
+
     save : function(){
         var data = {
             title : $('#title').val(),
@@ -81,5 +89,4 @@ var main = {
 };
 
 main.init();
-
 

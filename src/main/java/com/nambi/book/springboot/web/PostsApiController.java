@@ -1,9 +1,9 @@
 package com.nambi.book.springboot.web;
 
 import com.nambi.book.springboot.service.posts.PostsService;
-import com.nambi.book.springboot.web.dto.PostsResponseDto;
-import com.nambi.book.springboot.web.dto.PostsSaveRequestDto;
-import com.nambi.book.springboot.web.dto.PostsUpdateRequestDto;
+import com.nambi.book.springboot.web.dto.post.PostsResponseDto;
+import com.nambi.book.springboot.web.dto.post.PostsSaveRequestDto;
+import com.nambi.book.springboot.web.dto.post.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

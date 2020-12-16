@@ -1,0 +1,56 @@
+{{>layout/header}}
+
+<div class="col-md-12 container">
+    <div class="col-md-12">
+        <!-- 로그인 기능 영역 -->
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/" role="button" class="btn btn-primary">글 등록</a>
+            </div>
+        </div>
+        <br>
+        <!-- 목록 출력 영역 -->
+        <table class="table table-horizontal table-bordered">
+            <thead class="thead-strong">
+            <tr>
+                <th>메뉴구분</th>
+                <th>부모메뉴</th>
+                <th>메뉴번호</th>
+                <th>메뉴코드</th>
+                <th>메뉴명</th>
+                <th>메뉴아이콘</th>
+                <th>메뉴순번</th>
+                <th>장비구분</th>
+                <th>사용여부</th>
+                <th>수정일</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            {{#menu}}
+                <tr>
+                    <td>{{menuLev}}</td>
+                    <td>{{menuParentSeq}}</td>
+                    <td>{{menuSeq}}</td>
+                    <td>{{menuCd}}</td>
+                    <td>{{menuNm}}</td>
+                    <td>{{menuIcon}}</td>
+                    <td>{{menuOrder}}</td>
+                    <td>{{deviceFlag}}</td>
+                    <td>{{useYn}}</td>
+                    <td>{{upDt}}</td>
+                </tr>
+            {{/menu}}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
+{{>layout/footerJs}}
+<!--<script src="/js/app/nambiTableApi.js"></script>-->
+<!--<script src="/js/app/system/menu.js"></script>-->
+{{>layout/footer}}
+
+

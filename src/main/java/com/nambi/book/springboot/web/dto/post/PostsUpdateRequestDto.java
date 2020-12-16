@@ -1,4 +1,4 @@
-package com.nambi.book.springboot.web.dto;
+package com.nambi.book.springboot.web.dto.post;
 
 import lombok.Builder;
 import lombok.Getter;
