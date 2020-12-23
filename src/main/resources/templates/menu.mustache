@@ -3,16 +3,21 @@
 <div class="col-md-12 container">
     <div class="col-md-12">
         <!-- 로그인 기능 영역 -->
-        <div class="row">
-            <div class="col-md-6">
-                <a href="/dds" role="button" class="btn btn-primary">글 등록</a>
-            </div>
+        <div id="menuGrid">
+<!--            <div class="col-md-12">
+                <a href="/menu" role="button" class="btn btn-primary">조회</a>
+                <a id="menuAddRow" href="#" role="button" class="btn btn-default">추가</a>
+                <a id="menuSaveRow" href="#" role="button" class="btn btn-primary">저장</a>
+                <a id="menuDelRow" href="#" role="button" class="btn btn-error">삭제</a>
+                <a id="menuDownExcel" href="#" role="button" class="btn btn-default">엑셀다운로드</a>
+            </div>-->
         </div>
-        <br>
-        <!-- 목록 출력 영역 -->
+ <!--       <br>
+
+        &lt;!&ndash; 목록 출력 영역 &ndash;&gt;
         <table class="table table-horizontal table-bordered">
             <thead class="thead-strong">
-            <tr>
+            <tr id="menuTableHeaderTr">
                 <th>메뉴구분</th>
                 <th>부모메뉴</th>
                 <th>메뉴번호</th>
@@ -22,12 +27,11 @@
                 <th>메뉴순번</th>
                 <th>장비구분</th>
                 <th>사용여부</th>
-                <th>수정일</th>
             </tr>
             </thead>
             <tbody id="tbody">
             {{#menu}}
-                <tr>
+                <tr class="menuTableBodyTr">
                     <td>{{menuLev}}</td>
                     <td>{{menuParentSeq}}</td>
                     <td>{{menuSeq}}</td>
@@ -37,20 +41,27 @@
                     <td>{{menuOrder}}</td>
                     <td>{{deviceFlag}}</td>
                     <td>{{useYn}}</td>
-                    <td>{{upDt}}</td>
+                </tr>
+            {{/menu}}
+            {{^menu}}
+                <tr>
+                    <td colspan="10">조회된 정보가 없습니다.</td>
                 </tr>
             {{/menu}}
             </tbody>
         </table>
-    </div>
+
+
+    </div>-->
 
 </div>
 
 
 
 {{>layout/footerJs}}
-<!--<script src="/js/app/nambiTableApi.js"></script>-->
-<!--<script src="/js/app/system/menu.js"></script>-->
+<script src="/js/app/nambiTableApi.js"></script>
+<script src="/js/app/system/menu.js"></script>
+
 {{>layout/footer}}
 
 

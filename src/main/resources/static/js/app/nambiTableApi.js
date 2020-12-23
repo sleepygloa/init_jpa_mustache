@@ -1,6 +1,4 @@
-var url = '';
-var programId = '';
-var uProgramId = '';
+
 var trCnt = -1;
 
 var colRow = null;
@@ -100,7 +98,7 @@ function fnSaveReIdx(el){
     		tableTitle	: "", //테이블 상단에 보여줄 테이블 제목
     		grid		: "",
     		
-    		colName		: [],
+    		//colName		: [],
     		colRow		: [],
     		colOption	: [],
     		viewContents	: false,
@@ -120,7 +118,7 @@ function fnSaveReIdx(el){
     	//1. 데이터 세팅
 		var gridDataKey = Object.keys(tableInitData);
 		var dataKey = Object.keys(data);
-		
+		//정의한 변수를 이용한 옵션 변수 세팅
 		for ( var i in gridDataKey) {
 			var key = gridDataKey[i];
 			
@@ -135,11 +133,9 @@ function fnSaveReIdx(el){
 				}
 			}
 		}
-    	
+
     	initData = data;
-    	url = data.url;
-    	programId = data.programId; //프로그램 아이디
-    	uProgramId = programId.charAt(0).toUpperCase() + programId.slice(1); //프로그램 아이디 대문자
+
 
     	var title = data.programNm + '관리'; //페이지 상단의 페이지 제목
     	var tableTitle = data.programNm + '목록'; //그리드 이름
@@ -153,13 +149,8 @@ function fnSaveReIdx(el){
     	
     	
     	//데이터 세팅
-
-    	
-
     	var btn = data.btn;
 
-    	var $element = '';
-    	var navi = '';
     	//dataSetting
 //    	(data.checkBox == true ? checkBox = data.checkBox : checkBox);
 
@@ -171,42 +162,38 @@ function fnSaveReIdx(el){
     	//그리드 컬럼 만드는 로직
     	//gridData.colName
     	//gridData.colRow
-//    	$.ajax({
-//    		url : tableInitData.url + "list" + tableInitData.uProgramId,
-//    		async : false,
-//    		success : function(result){
-//
-//    			//키를 가져와 컬럼 이름을 구성
-////    			var colList = result.dt_grid[0];
-//    			if(result.dt_grid.length > 0){
-//        			var k = Object.keys(result.dt_grid[0]);
-//        			if(k.length > 0){
-//        				var tColName = [];
-//        				//그리드 옵션 중 컬럼 명이 없을
-//        				//조회된 모든 컬럼 불러옴.
-//        				if(tableInitData.colName == undefined){
-//            				for(var i = 0; i < k.length; i++){
-//            					tColName.push(k[i]);
-//            				}
-//            				tableInitData.colName = tColName;
-//            			//그리드 옵션 중에 컬럼명 지정
-//            			//지정한 컬럼만 불러옴.
-//        				}else{
-//        					for(var j = 0; j < tableInitData.colName.length; j++){
-//                				for(var i = 0; i < k.length; i++){
-//                					if(tableInitData.colName[j] == k[i]){
-//                						tColName.push(k[i]);
-//                						break;
-//                					}
-//                				}
-//        					}
-//        					tableInitData.colName = tColName;
-//        				}
-//        			}
-//    			}
-//    			tableInitData.colRow = result.dt_grid;
-//    		}
-//    	});
+    	$.ajax({
+    		//url : tableInitData.url + "list" + tableInitData.uProgramId,
+    		url : tableInitData.url,
+    		async : false,
+    		success : function(result){
+
+    			//키를 가져와 컬럼 이름을 구성
+//    			var colList = result.dt_grid[0];
+    			if(result.length > 0){
+        			var k = Object.keys(result[0]);
+        			if(k.length > 0){
+
+        				var tColName = [];
+        				//그리드 옵션 중 컬럼 명이 없을
+        				//조회된 모든 컬럼 불러옴.
+
+                        for(var j = 0; j < tableInitData.colOption.length; j++){
+                            for(var i = 0; i < k.length; i++){
+                                if(tableInitData.colOption[j].id == k[i]){
+                                    tColName.push(k[i]);
+                                    break;
+                                }
+                            }
+                        }
+                        tableInitData.colName = tColName;
+
+        			}
+    			}
+    			tableInitData.colRow = result;
+    		}
+    	});
+
 
 
     	//그리드 상단 그룹 버튼
@@ -250,6 +237,7 @@ function fnSaveReIdx(el){
     	divBtnGroup.append(gridBtnGrp);
 //    	gridDivContainer.append(divBtnGroup);
 
+
     	//테이블
     	var table = $('<table class="table center-aligned-table table-hover tableScrollX" />');
 
@@ -260,7 +248,7 @@ function fnSaveReIdx(el){
 
     	var ththData = '';
     	//FLAG
-		ththData += '<th>'+'FLAG'+'</th>';
+		ththData += '<th width="50px">'+'flag'+'</th>';
 		//FLAG End
     	for(var i = 0; i < tableInitData.colName.length; i++){
 			var tdTitle = '', tdWidth = '100px', tdHidden = false, tdHiddenCss = 'show';
@@ -273,7 +261,7 @@ function fnSaveReIdx(el){
 					if(tdHidden) tdHiddenCss = 'none';
 				}
 			}
-    		ththData += '<th style="width:'+tdWidth+'; display:'+tdHiddenCss+'">'+tableInitData.colName[i]+'</th>';
+    		ththData += '<th style="width:'+tdWidth+'; display:'+tdHiddenCss+'">'+tdTitle+'</th>';
     	}
     	var thth = $(ththData);
     	thead.append(thth);
@@ -304,23 +292,20 @@ function fnSaveReIdx(el){
 			var rowData = tableInitData.colRow[i];
 			var keyName = Object.keys(rowData);
 
-			for(var j = 0; j < tableInitData.colName.length; j++){
+			for(var j = 0; j < tableInitData.colOption.length; j++){
 				$.each(rowData, function(k, v){
 					var tdTitle = '';
 					var tdWidth = '100px';
 					var tdHidden = false;
 					var tdHiddenCss = 'show';
 
-					if(tableInitData.colOption != undefined){
-						if(colOption[j].id == k){
-							(tableInitData.colOption[j].title != '' ? tdTitle = tableInitData.colOption[j].title : tdTitle = tableInitData.colOption[j].id);
-							(tableInitData.colOption[j].width != '' ? tdWidth = tableInitData.colOption[j].width : tdWidth = '');
-							(tableInitData.colOption[j].hidden != '' ? tdHidden = tableInitData.colOption[j].hidden : tdHidden = false);
-							if(tdHidden) tdHiddenCss = 'none';
-						}
-					}
 
-					if(data.colName[j] == k){
+                    if(tableInitData.colOption[j].id == k){
+                        (tableInitData.colOption[j].title != '' ? tdTitle = tableInitData.colOption[j].title : tdTitle = tableInitData.colOption[j].id);
+                        (tableInitData.colOption[j].width != '' ? tdWidth = tableInitData.colOption[j].width : tdWidth = '');
+                        (tableInitData.colOption[j].hidden != '' ? tdHidden = tableInitData.colOption[j].hidden : tdHidden = false);
+                        if(tdHidden) tdHiddenCss = 'none';
+
 						tbthData += '<td class="td_row_'+k+'" style="width:'+tdWidth+';display:'+tdHiddenCss+'">'
 						+ '<span class="td_row_s_'+i+'" style="display:show">'+v+'</span>'
 						+ '<input type="text" class="td_row_i_'+i+'" value="'+v+'" style="display:none;width:100%" />'
@@ -347,8 +332,7 @@ function fnSaveReIdx(el){
 		
 		//타이틀, 테이블 버튼, 테이블 화면에 그림.
 //    	gridDivContainer.append(tableParentDiv);
-    	$('#'+programId+'Grid').html(gridDivContainer);
-
+    	$('#'+data.programId+'Grid').html(gridDivContainer);
 
 
     	//
@@ -1086,7 +1070,7 @@ function fnSaveReIdx(el){
 ////			var form = $('mainBlogUpdateForm')[0];
 ////			var formData = new FormData(form);
 ////
-////			if($('#'+programId+'FileUploadText').val() != ''){
+////			if($('#'+tableInitData.programId+'FileUploadText').val() != ''){
 ////				formData.append('file_0', $('#'+ tableInitData.programId+'FileUpload')[0].files[0]);
 ////			}
 //
@@ -1147,7 +1131,7 @@ function fnSaveReIdx(el){
 //					false,
 //					function callbackFunc(data){
 //
-////						if($('#'+programId+'FileUploadText').val() != ''){
+////						if($('#'+tableInitData.programId+'FileUploadText').val() != ''){
 ////						$.ajax({
 ////							url 	: tableInitData.url + "/save"+tableInitData.uProgramId+"FileUpload",
 ////							type	: 'POST',

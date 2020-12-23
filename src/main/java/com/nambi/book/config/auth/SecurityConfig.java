@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 "/api/**", "/api/juso/**"
                                 , "/loginUser"
                                 , "/popup/**"
-                                , "/menu"
+                                , "/menu/**"
                                 ).permitAll()
 /*                    .antMatchers("/api/v1/**"
                                 ,  "/common/**"
