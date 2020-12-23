@@ -1,6 +1,6 @@
 package com.nambi.book.domain.system;
 
-import com.nambi.book.domain.BaseTimeEntity2;
+import com.nambi.book.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,10 +10,10 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Menu extends BaseTimeEntity2 {
+public class Menu extends BaseTimeEntity {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     long menuSeq;
     @Column(nullable = false)

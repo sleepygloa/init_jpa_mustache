@@ -3,6 +3,7 @@ package com.nambi.book.web;
 import com.nambi.book.config.auth.LoginUser;
 import com.nambi.book.config.auth.dto.SessionUser;
 import com.nambi.book.service.posts.PostsService;
+import com.nambi.book.service.system.MenuService;
 import com.nambi.book.web.dto.post.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -31,13 +32,25 @@ public class IndexController {
     /************************************************************
      * 로그인 페이지로 이동
      *************************************************************/
-    @GetMapping("/common/login")
+    @GetMapping("/loginUser")
     public String login(){
-        return "system/login";
+        return "loginUser";
     }
 
 
+    /************************************************************
+     * 메뉴 페이지로 이동
+     *************************************************************/
+    @GetMapping("/menu")
+    public String menu(Model model){
+//        model.addAttribute("menu", menuService.findAlldesc());
+//        if(user != null){
+//            model.addAttribute("userName", user.getName());
+//        }
+        return "menu";
+    }
 
+    private final MenuService menuService;
     /************************************************************
     * 메인화면 게시판
     *************************************************************/

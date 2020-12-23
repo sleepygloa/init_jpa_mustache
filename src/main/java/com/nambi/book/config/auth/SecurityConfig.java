@@ -21,11 +21,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()
                     .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile",
                                 "/api/**", "/api/juso/**"
+                                , "/loginUser"
                                 , "/popup/**"
+                                , "/menu"
                                 ).permitAll()
+/*                    .antMatchers("/api/v1/**"
+                                ,  "/common/**"
+                    ).hasRole(Role.USER.name())*/
                     .antMatchers("/api/v1/**"
-//                            ,  "/common/**"
-                    ).hasRole(Role.USER.name())
+                                //,  "/menu"
+                    ).hasRole(Role.ADMIN.name())
                     .anyRequest().authenticated()
                 .and()
                     .logout()

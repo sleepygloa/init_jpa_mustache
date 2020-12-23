@@ -11,19 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 @Controller
 public class MenuController {
-    /************************************************************
-     * 메뉴 페이지로 이동
-     *************************************************************/
-    @GetMapping("/common/menu")
-    public String menu(Model model, @LoginUser SessionUser user){
-        model.addAttribute("menu", menuService.findAlldesc());
-        if(user != null){
-            model.addAttribute("userName", user.getName());
-        }
-        return "system/menu";
-    }
 
-    private final MenuService menuService;
 
 
 }
